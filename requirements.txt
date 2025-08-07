@@ -4,5 +4,4 @@ pandas
 numpy
 joblib
 python-multipart
-xgboostgit add requirements.txt
-git commit -m "Add xgboost to requirements.txt"
+xgboost
