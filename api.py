@@ -11,7 +11,7 @@ def load_model():
     try:
         BASE_DIR = os.path.dirname(os.path.abspath(__file__))
         model_path = os.path.join(BASE_DIR, "Model", "churn_model.pkl")
-        model = joblib.load(model_path)
+        model = joblib.load("Model/churn_model.pkl")
 
         print("Model Başarıyla Yüklendi.")
         return model
