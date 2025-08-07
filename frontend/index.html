@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Churn Prediction</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Müşteri Kaybı Tahmini</h1>
+    <p>Lütfen müşteri bilgilerini girin:</p>
+
+    <form>
+        <label>Cinsiyet:</label>
+        <select id="gender">
+            <option value="Male">Erkek</option>
+            <option value="Female">Kadın</option>
+        </select>
+        <br><br>
+
+        <label>Yaşlı Vatandaş:</label>
+        <select id="SeniorCitizen">
+            <option value="0">Hayır</option>
+            <option value="1">Evet</option>
+        </select>
+        <br><br>
+
+        <label>Evlilik Durumu:</label>
+        <select id="Partner">
+            <option value="Yes">Evet</option>
+            <option value="No">Hayır</option>
+        </select>
+        <br><br>
+
+        <label>Bağımlılar (Dependents):</label>
+        <select id="Dependents">
+            <option value="Yes">Evet</option>
+            <option value="No">Hayır</option>
+        </select>
+        <br><br>
+
+        <label>Abonelik Süresi (tenure):</label>
+        <input type="number" id="tenure" min="0">
+        <br><br>
+
+        <label>Telefon Hizmeti:</label>
+        <select id="PhoneService">
+            <option value="Yes">Evet</option>
+            <option value="No">Hayır</option>
+        </select>
+        <br><br>
+
+        <label>Çoklu Hat:</label>
+        <select id="MultipleLines">
+            <option value="Yes">Evet</option>
+            <option value="No">Hayır</option>
+            <option value="No phone service">Telefon Hizmeti Yok</option>
+        </select>
+        <br><br>
+
+        <label>İnternet Hizmeti:</label>
+        <select id="InternetService">
+            <option value="DSL">DSL</option>
+            <option value="Fiber optic">Fiber Optik</option>
+            <option value="No">Yok</option>
+        </select>
+        <br><br>
+
+        <label>Online Güvenlik:</label>
+        <select id="OnlineSecurity">
+            <option value="Yes">Evet</option>
+            <option value="No">Hayır</option>
+            <option value="No internet service">İnternet Hizmeti Yok</option>
+        </select>
+        <br><br>
+
+        <label>Online Yedekleme:</label>
+        <select id="OnlineBackup">
+            <option value="Yes">Evet</option>
+            <option value="No">Hayır</option>
+            <option value="No internet service">İnternet Hizmeti Yok</option>
+        </select>
+        <br><br>
+
+        <label>Cihaz Koruma:</label>
+        <select id="DeviceProtection">
+            <option value="Yes">Evet</option>
+            <option value="No">Hayır</option>
+            <option value="No internet service">İnternet Hizmeti Yok</option>
+        </select>
+        <br><br>
+
+        <label>Teknik Destek:</label>
+        <select id="TechSupport">
+            <option value="Yes">Evet</option>
+            <option value="No">Hayır</option>
+            <option value="No internet service">İnternet Hizmeti Yok</option>
+        </select>
+        <br><br>
+
+        <label>TV Yayını:</label>
+        <select id="StreamingTV">
+            <option value="Yes">Evet</option>
+            <option value="No">Hayır</option>
+            <option value="No internet service">İnternet Hizmeti Yok</option>
+        </select>
+        <br><br>
+
+        <label>Film Yayını:</label>
+        <select id="StreamingMovies">
+            <option value="Yes">Evet</option>
+            <option value="No">Hayır</option>
+            <option value="No internet service">İnternet Hizmeti Yok</option>
+        </select>
+        <br><br>
+
+        <label>Sözleşme Türü:</label>
+        <select id="Contract">
+            <option value="Month-to-month">Aylık</option>
+            <option value="One year">1 Yıl</option>
+            <option value="Two year">2 Yıl</option>
+        </select>
+        <br><br>
+
+        <label>Kağıtsız Fatura:</label>
+        <select id="PaperlessBilling">
+            <option value="Yes">Evet</option>
+            <option value="No">Hayır</option>
+        </select>
+        <br><br>
+
+        <label>Aylık Ücret:</label>
+        <input type="number" id="MonthlyCharges" step="0.01">
+        <br><br>
+
+        <label>Toplam Ücret:</label>
+        <input type="number" id="TotalCharges" step="0.01">
+        <br><br>
+
+        <label>Ödeme Yöntemi:</label>
+        <select id="PaymentMethod">
+            <option value="Bank transfer (automatic)">Banka Transferi (Otomatik)</option>
+            <option value="Credit card (automatic)">Kredi Kartı (Otomatik)</option>
+            <option value="Electronic check">Elektronik Çek</option>
+            <option value="Mailed check">Posta Çeki</option>
+        </select>
+        <br><br>
+
+        <button type="button" onclick="makePrediction()">Tahmin Et</button>
+    </form>
+
+    <div id="result"></div>
+
+    <script>
+        async function makePrediction() {
+            let data = {
+                gender: document.getElementById("gender").value,
+                SeniorCitizen: parseInt(document.getElementById("SeniorCitizen").value),
+                Partner: document.getElementById("Partner").value,
+                Dependents: document.getElementById("Dependents").value,
+                tenure: parseInt(document.getElementById("tenure").value),
+                PhoneService: document.getElementById("PhoneService").value,
+                MultipleLines: document.getElementById("MultipleLines").value,
+                InternetService: document.getElementById("InternetService").value,
+                OnlineSecurity: document.getElementById("OnlineSecurity").value,
+                OnlineBackup: document.getElementById("OnlineBackup").value,
+                DeviceProtection: document.getElementById("DeviceProtection").value,
+                TechSupport: document.getElementById("TechSupport").value,
+                StreamingTV: document.getElementById("StreamingTV").value,
+                StreamingMovies: document.getElementById("StreamingMovies").value,
+                Contract: document.getElementById("Contract").value,
+                PaperlessBilling: document.getElementById("PaperlessBilling").value,
+                MonthlyCharges: parseFloat(document.getElementById("MonthlyCharges").value),
+                TotalCharges: parseFloat(document.getElementById("TotalCharges").value),
+                PaymentMethod: document.getElementById("PaymentMethod").value
+            };
+
+            try {
+                let response = await fetch('http://127.0.0.1:8080/predict', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                let result = await response.json();
+
+                document.getElementById("result").innerHTML =
+                    "<h3>Tahmin Sonucu:</h3>" +
+                    "<p>Churn: " + (result.Churn_Prediction == 1 ? "AYRILACAK" : "KALACAK") + "</p>" +
+                    "<p>Risk: %" + (result.Churn_Probability * 100).toFixed(1) + "</p>";
+
+            } catch (error) {
+                document.getElementById("result").innerHTML = "<p>Hata: " + error + "</p>";
+            }
+        }
+    </script>
+</body>
+</html>
