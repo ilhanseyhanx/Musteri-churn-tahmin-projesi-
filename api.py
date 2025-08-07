@@ -3,12 +3,16 @@ from pydantic import BaseModel
 import joblib
 import pandas as pd
 from fastapi.middleware.cors import CORSMiddleware
+import os
 import numpy as np
 
 
 def load_model():
     try:
-        model = joblib.load("D:\YAZILIMLARIM\PythonProjelerim\Churn\Model\churn_model.pkl")
+        BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+        model_path = os.path.join(BASE_DIR, "Model", "churn_model.pkl")
+        model = joblib.load(model_path)
+
         print("Model Başarıyla Yüklendi.")
         return model
     except Exception as e:
