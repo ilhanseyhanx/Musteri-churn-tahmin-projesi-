@@ -44,7 +44,7 @@ scale_weight = (y == 0).sum() / (y == 1).sum()
 
 
 param_grid = {
-    'n_estimators': [100, 200],             # Ağaç sayısı
+    'n_estimators': [100],             # Ağaç sayısı
     'max_depth': [3, 5],                    # Ağaçların maksimum derinliği
     'learning_rate': [0.01, 0.1],           # Öğrenme hızı
     'subsample': [0.8, 1],                  # Her ağaç için kullanılacak veri oranı
