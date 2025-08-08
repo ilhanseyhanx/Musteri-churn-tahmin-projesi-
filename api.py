@@ -24,7 +24,7 @@ model = load_model()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Frontend adresini izin ver
+    allow_origins=["*"], 
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -44,22 +44,22 @@ def model_info():
             "Status":"Model Hazır"}
 
 class CustomerInput(BaseModel):
-    gender: str  # "Male" veya "Female"
-    SeniorCitizen: int  # 0 veya 1
-    Partner: str  # "Yes" veya "No"
-    Dependents: str  # "Yes" veya "No"
-    tenure: int  # ay sayısı
-    PhoneService: str  # "Yes" veya "No"
-    MultipleLines: str  # "Yes", "No", "No phone service"
-    InternetService: str  # "DSL", "Fiber optic", "No"
-    OnlineSecurity: str  # "Yes", "No", "No internet service"
-    OnlineBackup: str  # "Yes", "No", "No internet service"
-    DeviceProtection: str  # "Yes", "No", "No internet service"
-    TechSupport: str  # "Yes", "No", "No internet service"
-    StreamingTV: str  # "Yes", "No", "No internet service"
-    StreamingMovies: str  # "Yes", "No", "No internet service"
-    Contract: str  # "Month-to-month", "One year", "Two year"
-    PaperlessBilling: str  # "Yes" veya "No"
+    gender: str  
+    SeniorCitizen: int  
+    Partner: str  
+    Dependents: str  
+    tenure: int 
+    PhoneService: str  
+    MultipleLines: str  
+    InternetService: str  
+    OnlineSecurity: str 
+    OnlineBackup: str 
+    DeviceProtection: str 
+    TechSupport: str 
+    StreamingTV: str  
+    StreamingMovies: str 
+    Contract: str  
+    PaperlessBilling: str 
     MonthlyCharges: float
     TotalCharges: float
     PaymentMethod: str
@@ -124,8 +124,8 @@ def predict_churn(customer: CustomerInput):
 
     return {
         "Churn_Prediction": int(prediction),
-        "Churn_Probability": float(probability[1]),  # ✅ probability[1] = churn olasılığı
-        "No_Churn_Probability": float(probability[0]),  # Bonus: churn olmama olasılığı
+        "Churn_Probability": float(probability[1]),  
+        "No_Churn_Probability": float(probability[0]), 
         "risk_level": "HIGH" if probability[1] > 0.6 else "MEDIUM" if probability[1] > 0.4 else "LOW"
     }
 
